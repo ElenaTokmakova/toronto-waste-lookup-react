@@ -1,0 +1,111 @@
+html, body {
+  font-size: 16px;
+	margin: 0;
+	padding: 0;
+  height: 100%;
+  font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+  * {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  background-color: #000000;
+	.container {
+    margin: 20px auto;
+    padding: 20px 0 0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-image: linear-gradient(to right, #1d5a94, #23965f);
+      min-height: 150px;
+      h1 {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 3rem;
+        padding: 10px;
+      }
+    }
+    .content-wrapper-container {
+      .form-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 20px;
+        .form-layout-wrapper {
+          margin-bottom: 0;
+          .col-lg-11 {
+            padding-right: 0;
+          }
+          .form-input {
+            height: 65px;
+            input {
+              height: 65px;
+              border-color: #aaaaaa;
+              font-size: 1.75rem;
+              color: #000000;
+            }
+          }
+          .form-icon {
+            height: 65px;
+            width: 65px;
+            font-size: 2.5rem;
+            color: #ffffff;
+            background-color: #23995c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            &:hover {
+              cursor: pointer;
+            }
+            span {
+              padding: 0;
+              margin: 0;
+            }
+          }
+        }
+      }
+      .results-favourites-wrapper {
+        padding: 20px;
+        &.favourites {
+          background-color: #f7fefa;
+          .favourites-title {
+            color: #23995c;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+          }
+        }
+        margin-top: 0;
+        .garbage-item {
+          font-size: 1.3rem;
+          font-weight: 400;
+          margin-bottom: 1.5rem;
+          span {
+            margin-right: 10px;
+            color: #aaaaaa;
+            &.favourited {
+              color: #23995c;
+            }
+          }
+          ul {
+            li {
+              line-height: 1.7rem;
+              margin-bottom: 1rem;
+            }
+          }
+        }
+      }
+    }
+	}
+}
+
+.loading {
+  text-align: center;
+}
