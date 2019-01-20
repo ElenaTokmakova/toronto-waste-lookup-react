@@ -4,7 +4,10 @@ import Content from './content';
 
 const App = () => {
     return (
-      <div className="container">
+      <div className="container app-container">
+        <div className="trapezoid">
+          <div className="circle"></div>
+        </div>
         <Header />
         <Content />
       </div>

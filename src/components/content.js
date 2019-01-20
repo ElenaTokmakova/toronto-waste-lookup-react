@@ -123,7 +123,7 @@ class Content extends Component {
 
 	render() {
 
-		if (this.state.externalData === null) {
+	if (this.state.externalData === null) {
       return <Container className="loading"><h1>Loading...</h1></Container>
     } else {
 			return (

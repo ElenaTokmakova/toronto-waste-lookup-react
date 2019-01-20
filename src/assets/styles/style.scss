@@ -12,10 +12,33 @@ html, body {
 body {
   background-color: #000000;
 	.container {
-    margin: 20px auto;
-    padding: 20px 0 0;
+    position: relative;
+    margin: 35px auto;
+    padding: 0;
     border-radius: 5px;
     background-color: #ffffff;
+    &.app-container {
+      border-top: 20px solid #f3f3f3;
+    }
+    .trapezoid {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      border-bottom: 20px solid #f3f3f3;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      height: 0;
+      width: 100px;
+      .circle {
+        position: absolute;
+        top: 7px;
+        left: 69px;
+        width: 8px;
+        height: 8px;
+        background: #ffffff;
+        border-radius: 50%
+      }
+    }
     header {
       display: flex;
       align-items: center;
@@ -103,7 +126,7 @@ body {
         }
       }
     }
-	}
+  }
 }
 
 .loading {
