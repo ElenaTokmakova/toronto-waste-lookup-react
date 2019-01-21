@@ -8,7 +8,6 @@ class Content extends Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {
-			externalData: null,
 			inputValue: '',
 			currentSearchResults: []
 		};
@@ -21,54 +20,14 @@ class Content extends Component {
 
 	}
 
-	// The recommended path for most use cases is to move data-fetching into componentDidMount
-	// The componentDidMount() method runs after the component output has been rendered to the DOM
-
-	componentDidMount() {
-
-		// cancel the previous request
-		if (typeof this._source != typeof undefined) {
-      this._source.cancel('Operation canceled due to new request')
-		}
-
-		// save the new request for cancellation
-    this._source = axios.CancelToken.source();
-
-    axios.get('/data.json', {
-			// cancel token used by axios
-      cancelToken: this._source.token
-		})
-		.then(externalData => {
-				externalData.data.map( (externalDataItem, i) => {
-					externalDataItem.favourited = false,
-					externalDataItem.index = i
-				});
-				this.setState({externalData : externalData.data});
-				console.log('Data', this.state.externalData);
-      }
-		)
-		.catch(error => {
-			if(axios.isCancel(error)){
-				console.log('Request is canceled', error);
-			} else {
-				console.log(error);
-			}
-		});
-  }
-
-	// Invoked right before React unmounts and destroys the component
-  componentWillUnmount() {
-    if (this._source) {
-			this._source.cancel('Operation canceled due to component unmounting');
-    }
-	}
-
 	handleChange(event){
 		const inputValue = event.target.value;
 		this.setState({inputValue});
 		if (inputValue === "") {
-			this.currentSearchResults = [];
-			// console.log('Cleared search results', this.currentSearchResults);
+			this.setState({
+				currentSearchResults: []
+			});
+			console.log('Cleared search results', this.state.currentSearchResults);
 		}
 	}
 
@@ -79,17 +38,17 @@ class Content extends Component {
 			return;
 		} else {
 			this.setState({ inputValue });
-			const filtered = this.state.externalData.filter( item => {
+			const filtered = this.props.externalData.filter( item => {
 				return item.keywords.includes(this.state.inputValue);
 			});
 
 			this.state.currentSearchResults = filtered;
-			console.log('The filtered items are', this.state.currentSearchResults);
+			console.log('The search results are', this.state.currentSearchResults);
 		}
 	}
 
 	handleFavouriteStatusChange(index) {
-		const items = this.state.externalData.slice();
+		const items = this.props.externalData.slice();
 		const item = items[index];
 		item.favourited = !item.favourited;
 		if (item.favourited) {
@@ -103,6 +62,7 @@ class Content extends Component {
 	}
 
 	renderSearchResults() {
+		console.log('Rendering search results', this.state.currentSearchResults);
 		return this.state.currentSearchResults.map( searchResult => {
 			return (
 				<Item details={searchResult} key={searchResult.index} handleFavouriteStatusChange={this.handleFavouriteStatusChange}/>
@@ -111,7 +71,8 @@ class Content extends Component {
 	}
 
 	renderFavourites() {
-		const favourited = this.state.externalData.filter( item => {
+		console.log('Rendering favourites');
+		const favourited = this.props.externalData.filter( item => {
 			return item.favourited;
 		});
 		return favourited.map( item => {
@@ -123,7 +84,7 @@ class Content extends Component {
 
 	render() {
 
-	if (this.state.externalData === null) {
+	if (this.props.externalData === null) {
       return <Container className="loading"><h1>Loading...</h1></Container>
     } else {
 			return (
@@ -142,7 +103,7 @@ class Content extends Component {
 							</Container>
 					}
 					{
-						this.favouritesCounter > 0 &&
+						this.favouritesCounter > 1 &&
 							<div className="results-favourites-wrapper favourites">
 								<h2 className="favourites-title">Favourites</h2>
 								{

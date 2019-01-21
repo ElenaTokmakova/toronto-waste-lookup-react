@@ -59,37 +59,56 @@ body {
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        padding: 20px;
+        padding: 20px 20px 40px;
         .form-layout-wrapper {
           margin-bottom: 0;
-          .col-lg-11 {
-            padding-right: 0;
-          }
-          .form-input {
-            height: 65px;
-            input {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          .search-input-wrapper {
+            flex: 1;
+            .form-input {
               height: 65px;
-              border-color: #aaaaaa;
-              font-size: 1.75rem;
-              color: #000000;
+              margin-right: 1rem;
+              @media only screen and (max-width: 575px) {
+                margin-right: 0;
+              }
+              input {
+                height: 65px;
+                border-color: #aaaaaa;
+                font-size: 1.75rem;
+                color: #000000;
+              }
             }
           }
-          .form-icon {
-            height: 65px;
-            width: 65px;
-            font-size: 2.5rem;
-            color: #ffffff;
-            background-color: #23995c;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            &:hover {
-              cursor: pointer;
+          .search-icon-wrapper {
+            @media only screen and (max-width: 575px) {
+              width: 100%;
+              margin-top: 1rem;
             }
-            span {
-              padding: 0;
+            .form-icon {
+              height: 65px;
+              width: 65px;
+              font-size: 2.5rem;
+              color: #ffffff;
+              background-color: #23995c;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 4px;
               margin: 0;
+              &:hover {
+                cursor: pointer;
+              }
+              span {
+                padding: 0;
+                margin: 0;
+              }
+              @media only screen and (max-width: 575px) {
+                width: 100%;
+              }
             }
           }
         }
@@ -113,6 +132,9 @@ body {
           span {
             margin-right: 10px;
             color: #aaaaaa;
+            &:hover {
+              cursor: pointer;
+            }
             &.favourited {
               color: #23995c;
             }
